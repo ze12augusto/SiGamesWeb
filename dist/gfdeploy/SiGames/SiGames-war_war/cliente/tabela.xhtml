@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<ui:fragment xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:ui="http://java.sun.com/jsf/facelets"
+             xmlns:p="http://primefaces.org/ui"
+             xmlns:h="http://java.sun.com/jsf/html">
+
+    <h:form id="formTabela">
+    
+    <p:contextMenu for="tabelaCliente">
+        <p:menuitem value="Excluir" icon="ui-icon-close"
+                    actionListener="#{pessoaManagedBean.excluir()}"
+                    update="painelTabela"></p:menuitem>
+         <p:menuitem value="Editar" icon="ui-icon-pencil"
+                     actionListener="#{pessoaManagedBean.editar()}"
+                    update=":formCliente:painelCliente"></p:menuitem>
+    </p:contextMenu>
+    
+    <p:panel header="Clientes cadastrados" id="painelTabela">
+        <p:dataTable paginator="true"
+                     rows="10"
+                     id="tabelaCliente"
+                     emptyMessage="Nenhum cliente cadastrado"
+                     rowKey="#{cliente}"
+                     selection="#{pessoaManagedBean.pessoaSelecionada}"
+                     value="#{pessoaManagedBean.listar()}"
+                     var="cliente"
+                     selectionMode="single">
+
+            <p:column headerText="Código">
+                #{cliente.idPessoa}
+            </p:column>
+
+            <p:column headerText="Nome">
+                #{cliente.nome}
+            </p:column>
+            
+            <p:column headerText="Data Cadastro">
+                #{cliente.dataCadastro}
+            </p:column>
+            
+        </p:dataTable>
+    </p:panel>
+        
+        </h:form>
+
+
+</ui:fragment>

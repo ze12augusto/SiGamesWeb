@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<ui:fragment xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:ui="http://java.sun.com/jsf/facelets"
+             xmlns:h="http://java.sun.com/jsf/html"
+             xmlns:p="http://primefaces.org/ui">
+
+    <h:form id="formCliente">
+        <p:panel header="Cadastro de Clientes" id="painelCliente">
+            <p:growl/>
+            <h:inputHidden
+                value="#{pessoaManagedBean.pessoa.idPessoa}"/>
+            Nome:
+            <p:inputText
+                value="#{pessoaManagedBean.pessoa.nome}"/>
+            
+            Data de Cadastro:
+            <p:inputText
+                value="#{pessoaManagedBean.pessoa.dataCadastro}"/>
+            
+            <p:commandButton 
+                value="Salvar" 
+                icon="ui-icon-disk" 
+                actionListener="#{pessoaManagedBean.salvarCliente()}"
+                update="painelCliente, :formTabela:painelTabela"/>
+        </p:panel>
+    </h:form>
+
+</ui:fragment>
