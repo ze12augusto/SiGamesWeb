@@ -1,24 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package br.com.sigames.ejb.entidades;
 
 import java.io.Serializable;
 import java.math.BigInteger;
-import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -26,23 +16,17 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @Entity
 @Table(name = "Produto_Fornecedor")
-@XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "ProdutoFornecedor.findAll", query = "SELECT p FROM ProdutoFornecedor p"),
-    @NamedQuery(name = "ProdutoFornecedor.findByIdProduto", query = "SELECT p FROM ProdutoFornecedor p WHERE p.produtoFornecedorPK.idProduto = :idProduto"),
-    @NamedQuery(name = "ProdutoFornecedor.findByPrecoUnitario", query = "SELECT p FROM ProdutoFornecedor p WHERE p.precoUnitario = :precoUnitario"),
-    @NamedQuery(name = "ProdutoFornecedor.findByFornecedorIdPessoa", query = "SELECT p FROM ProdutoFornecedor p WHERE p.produtoFornecedorPK.fornecedorIdPessoa = :fornecedorIdPessoa")})
 public class ProdutoFornecedor implements Serializable {
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected ProdutoFornecedorPK produtoFornecedorPK;
-    @Basic(optional = false)
-    @NotNull
+    @NotNull(message = "Informe o preco")
     @Column(name = "PrecoUnitario", nullable = false)
     private BigInteger precoUnitario;
     @JoinColumn(name = "IdProduto", referencedColumnName = "IdProduto", nullable = false, insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Produto produto;
+    @NotNull(message = "Selecione o fornecedor")
     @JoinColumn(name = "FornecedorIdPessoa", referencedColumnName = "IdPessoa", nullable = false, insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Fornecedor fornecedor;

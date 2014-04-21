@@ -43,7 +43,7 @@ public class Pessoa implements Serializable {
 
     @NotNull(message = "Informe a data")
     @Column(name = "DataCadastro", nullable = false)
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date dataCadastro;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "pessoa")

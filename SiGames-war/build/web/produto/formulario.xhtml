@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<ui:fragment xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:ui="http://java.sun.com/jsf/facelets"
+             xmlns:h="http://java.sun.com/jsf/html"
+             xmlns:p="http://primefaces.org/ui"
+             xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:form id="formProduto">
+        <p:panel header="Cadastro de Produtos" id="painelProduto">
+            <p:growl/>
+            <h:inputHidden
+                value="#{produtoManagedBean.produto.idProduto}"/>
+            Nome:
+            <p:inputText
+                value="#{produtoManagedBean.produto.nome}"/>
+
+            Tipo Produto:
+            <p:inputText
+                value="#{produtoManagedBean.produto.tipoProduto}"/>
+
+            Preço Unitário:
+            <p:inputText
+                value="#{produtoManagedBean.pf.precoUnitario}"/>
+
+            <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">  
+
+                <h:outputText value="Fornecedor : " />  
+                <p:selectOneMenu value="#{produtoManagedBean.pf.fornecedor}" converter="#{fornecedorConverter}">  
+                    <f:selectItem itemLabel="#{fornecedor.nome}" itemValue="#{fornecedor.idPessoa}" />  
+                    <f:selectItems value="#{pessoaManagedBean.listarFornecedores()}" var="fornecedor" 
+                                   itemLabel="#{fornecedor.nome}" itemValue="#{fornecedor.idPessoa}" />
+                </p:selectOneMenu>
+
+            </h:panelGrid>
+
+            <p:commandButton 
+                value="Salvar" 
+                icon="ui-icon-disk" 
+                actionListener="#{produtoManagedBean.salvar()}"
+                update="painelProduto, :formTabela:painelTabela"/>
+        </p:panel>
+    </h:form>
+
+</ui:fragment>
