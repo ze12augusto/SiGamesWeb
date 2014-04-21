@@ -13,15 +13,15 @@ import javax.inject.Named;
  *
  * @author joseaugusto
  */
-@Named("criadorClientePadrao")
+@Named("criadorFornecedorPadrao")
 @RequestScoped
-public class CriadorClientePadrao {
+public class CriadorFornecedorPadrao {
 
     @EJB
     private PessoaEJB pessoaEjb;
 
     @EJB
-    private ClienteEJB clienteEjb;
+    private FornecedorEJB fornecedorEjb;
 
     @EJB
     private UfEJB ufEjb;
@@ -45,9 +45,9 @@ public class CriadorClientePadrao {
     private List<Endereco> enderecos;
     private List<Telefone> telefones;
 
-    public void criadorClientePadrao(){
+    public void criadorFornecedorPadrao(){
     
-        pessoas = pessoaEjb.listarClientes();
+        pessoas = pessoaEjb.listarFornecedores();
         if(pessoas.isEmpty()){
         
             criadorPessoaPadrao();
@@ -56,7 +56,7 @@ public class CriadorClientePadrao {
     
     private void criadorPessoaPadrao() {
 
-        String nome = "José Augusto Martins Regis";
+        String nome = "Marco Antônio Rodrigues";
         
         pessoa = new Pessoa();
         pessoa.setNome(nome);
@@ -71,7 +71,7 @@ public class CriadorClientePadrao {
             criadorDocumentoPadrao();
             criadorEnderecoPadrao();
             criadorTelefonePadrao();
-            clienteEjb.salvar(pessoa.getIdPessoa());
+            fornecedorEjb.salvar(pessoa.getIdPessoa());
             pessoaEjb.salvar(pessoa);
             System.out.println("salvando pessoa -> id = " +pessoa.getIdPessoa()
                     +"nome = " + pessoa.getNome()
@@ -90,9 +90,9 @@ public class CriadorClientePadrao {
     private void criadorEnderecoPadrao() {
 
         endereco = new Endereco();
-        endereco.setBairro("Bela Vista");
+        endereco.setBairro("nao sei");
         endereco.setCidade("Lagoa Formosa");
-        endereco.setLogradouro("José Marciano");
+        endereco.setLogradouro("nao sei");
         endereco.setNumero(new Short("20"));
         endereco.setPessoa(pessoa);
         endereco.setUf(ufEjb.recuperaUf());

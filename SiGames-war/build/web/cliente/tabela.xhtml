@@ -13,7 +13,7 @@ and open the template in the editor.
     
     <p:contextMenu for="tabelaCliente">
         <p:menuitem value="Excluir" icon="ui-icon-close"
-                    actionListener="#{pessoaManagedBean.excluir()}"
+                    actionListener="#{pessoaManagedBean.excluirCliente()}"
                     update="painelTabela"></p:menuitem>
          <p:menuitem value="Editar" icon="ui-icon-pencil"
                      actionListener="#{pessoaManagedBean.editar()}"
@@ -27,7 +27,7 @@ and open the template in the editor.
                      emptyMessage="Nenhum cliente cadastrado"
                      rowKey="#{cliente}"
                      selection="#{pessoaManagedBean.pessoaSelecionada}"
-                     value="#{pessoaManagedBean.listar()}"
+                     value="#{pessoaManagedBean.listarClientes()}"
                      var="cliente"
                      selectionMode="single">
 

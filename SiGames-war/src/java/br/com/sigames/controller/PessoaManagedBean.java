@@ -6,6 +6,7 @@ import br.com.sigames.ejb.Ejb.PessoaEJB;
 import br.com.sigames.ejb.Ejb.EnderecoEJB;
 import br.com.sigames.ejb.Ejb.TelefoneEJB;
 import br.com.sigames.ejb.Ejb.DocumentoEJB;
+import br.com.sigames.ejb.Ejb.FornecedorEJB;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
@@ -28,6 +29,9 @@ public class PessoaManagedBean {
     private ClienteEJB clienteService;
 
     @EJB
+    private FornecedorEJB fornecedorService;
+    
+    @EJB
     private PessoaEJB pessoaService;
     
     @EJB
@@ -43,9 +47,14 @@ public class PessoaManagedBean {
         pessoa = new Pessoa();
     }
 
-    public List<Pessoa> listar(){
+    public List<Pessoa> listarClientes(){
     
-        return pessoaService.listar();
+        return pessoaService.listarClientes();
+    }
+    
+     public List<Pessoa> listarFornecedores(){
+    
+        return pessoaService.listarFornecedores();
     }
     
     public void salvarCliente() {
@@ -68,15 +77,35 @@ public class PessoaManagedBean {
     public void salvarFornecedor() {
 
         String erro = pessoaService.salvar(pessoa);
+
+        if (erro == null) {
+
+            fornecedorService.salvar(recuperaIdPessoaPorNome(pessoa.getNome()));
+
+        } else {
+            FacesMessage fm
+                    = new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                            erro, null);
+            FacesContext.getCurrentInstance().addMessage(null, fm);
+        }
         pessoa = new Pessoa();
     }
 
-    public void excluir() {
+    public void excluirCliente() {
         
         documentoEjb.recuperaIdDocumentoPorIdPessoa(pessoaSelecionada.getIdPessoa());
         telefoneEjb.recuperaIdTelefonePorIdPessoa(pessoaSelecionada.getIdPessoa());
         enderecoEjb.recuperaEnderecoPorIdPessoa(pessoaSelecionada.getIdPessoa());
         clienteService.remover(pessoaSelecionada.getIdPessoa());
+        pessoaService.remover(pessoaSelecionada.getIdPessoa());
+    }
+    
+    public void excluirFornecedor() {
+        
+        documentoEjb.recuperaIdDocumentoPorIdPessoa(pessoaSelecionada.getIdPessoa());
+        telefoneEjb.recuperaIdTelefonePorIdPessoa(pessoaSelecionada.getIdPessoa());
+        enderecoEjb.recuperaEnderecoPorIdPessoa(pessoaSelecionada.getIdPessoa());
+        fornecedorService.remover(pessoaSelecionada.getIdPessoa());
         pessoaService.remover(pessoaSelecionada.getIdPessoa());
     }
 

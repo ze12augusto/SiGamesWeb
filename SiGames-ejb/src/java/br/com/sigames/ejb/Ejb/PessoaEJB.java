@@ -53,13 +53,22 @@ public class PessoaEJB {
         return pessoaQuery.setParameter("nome", nome).getSingleResult();
     }
 
-    public List<Pessoa> listar() {
+    public List<Pessoa> listarClientes() {
 
         TypedQuery<Pessoa> clienteQuery
                 = em.createQuery("select p from Pessoa as p inner join p.cliente as c",
                         Pessoa.class);
 
         return clienteQuery.getResultList();
+    }
+    
+    public List<Pessoa> listarFornecedores() {
+
+        TypedQuery<Pessoa> fornecedorQuery
+                = em.createQuery("select p from Pessoa as p inner join p.fornecedor as f",
+                        Pessoa.class);
+
+        return fornecedorQuery.getResultList();
     }
 
 }

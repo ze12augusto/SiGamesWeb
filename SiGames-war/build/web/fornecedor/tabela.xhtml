@@ -11,36 +11,36 @@ and open the template in the editor.
 
     <h:form id="formTabela">
     
-    <p:contextMenu for="tabelaCliente">
+    <p:contextMenu for="tabelaFornecedor">
         <p:menuitem value="Excluir" icon="ui-icon-close"
-                    actionListener="#{pessoaManagedBean.excluirCliente()}"
+                    actionListener="#{pessoaManagedBean.excluirFornecedor()}"
                     update="painelTabela"></p:menuitem>
          <p:menuitem value="Editar" icon="ui-icon-pencil"
                      actionListener="#{pessoaManagedBean.editar()}"
-                    update=":formCliente:painelCliente"></p:menuitem>
+                    update=":formFornecedor:painelFornecedor"></p:menuitem>
     </p:contextMenu>
     
-    <p:panel header="Clientes cadastrados" id="painelTabela">
+    <p:panel header="Fornecedores cadastrados" id="painelTabela">
         <p:dataTable paginator="true"
                      rows="10"
-                     id="tabelaCliente"
-                     emptyMessage="Nenhum cliente cadastrado"
-                     rowKey="#{cliente}"
+                     id="tabelaFornecedor"
+                     emptyMessage="Nenhum fornecedor cadastrado"
+                     rowKey="#{fornecedor}"
                      selection="#{pessoaManagedBean.pessoaSelecionada}"
-                     value="#{pessoaManagedBean.listarClientes()}"
-                     var="cliente"
+                     value="#{pessoaManagedBean.listarFornecedores()}"
+                     var="fornecedor"
                      selectionMode="single">
 
             <p:column headerText="Código">
-                #{cliente.idPessoa}
+                #{fornecedor.idPessoa}
             </p:column>
 
             <p:column headerText="Nome">
-                #{cliente.nome}
+                #{fornecedor.nome}
             </p:column>
             
             <p:column headerText="Data Cadastro">
-                #{cliente.dataCadastro}
+                #{fornecedor.dataCadastro}
             </p:column>
             
         </p:dataTable>
