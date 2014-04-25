@@ -30,10 +30,10 @@ and open the template in the editor.
             <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">  
 
                 <h:outputText value="Fornecedor : " />  
-                <p:selectOneMenu value="#{produtoManagedBean.pf.fornecedor}" converter="#{fornecedorConverter}">  
+                <p:selectOneMenu value="#{produtoManagedBean.pf.fornecedor}" converter="fornecedorConverter">  
                     <f:selectItem itemLabel="#{fornecedor.nome}" itemValue="#{fornecedor.idPessoa}" />  
                     <f:selectItems value="#{pessoaManagedBean.listarFornecedores()}" var="fornecedor" 
-                                   itemLabel="#{fornecedor.nome}" itemValue="#{fornecedor.idPessoa}" />
+                                   itemLabel="#{fornecedor.nome}" itemValue="#{fornecedor}" />
                 </p:selectOneMenu>
 
             </h:panelGrid>

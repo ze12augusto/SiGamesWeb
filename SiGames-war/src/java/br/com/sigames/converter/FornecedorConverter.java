@@ -11,7 +11,6 @@ import javax.inject.Named;
  *
  * @author joseaugusto
  */
-@Named("fornecedorConverter")
 @FacesConverter(value = "fornecedorConverter", forClass = Fornecedor.class)
 public class FornecedorConverter implements Converter {
 
@@ -28,8 +27,8 @@ public class FornecedorConverter implements Converter {
     @Override
     public String getAsString(FacesContext context, UIComponent component, Object value) {
         if (value != null && value instanceof Fornecedor) {
-
-            return String.valueOf(((Fornecedor) value).getPessoa());
+            Fornecedor fornecedor = (Fornecedor) value;
+            return fornecedor.getIdPessoa().toString();
         }
         return null;
     }
