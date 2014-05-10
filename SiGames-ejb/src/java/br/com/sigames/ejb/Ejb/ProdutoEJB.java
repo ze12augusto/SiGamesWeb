@@ -46,7 +46,7 @@ public class ProdutoEJB {
         return null;
     }
 
-    public void recuperaIdProdutoPorIdFornecedor(Integer idProduto) {
+    public void recuperaIdProduto(Integer idProduto) {
 
         TypedQuery<Produto> produtoQuery
                 = em.createQuery("select t from Produto t where t.idProduto = :idProduto",

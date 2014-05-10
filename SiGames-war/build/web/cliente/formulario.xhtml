@@ -7,7 +7,8 @@ and open the template in the editor.
 <ui:fragment xmlns="http://www.w3.org/1999/xhtml"
              xmlns:ui="http://java.sun.com/jsf/facelets"
              xmlns:h="http://java.sun.com/jsf/html"
-             xmlns:p="http://primefaces.org/ui">
+             xmlns:p="http://primefaces.org/ui"
+             xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <h:form id="formCliente">
         <p:panel header="Cadastro de Clientes" id="painelCliente">
@@ -18,10 +19,87 @@ and open the template in the editor.
             <p:inputText
                 value="#{pessoaManagedBean.pessoa.nome}"/>
             
-            Data de Cadastro:
-            <p:inputText
-                value="#{pessoaManagedBean.pessoa.dataCadastro}"/>
+             <h:inputHidden
+                 value="#{pessoaManagedBean.documento.idDocumento}"/>
             
+             <br/>Documento:
+            <p:inputText
+                value="#{pessoaManagedBean.documento.documento}"/>
+            
+            Tipo Documento:
+            <p:selectOneMenu
+                value="#{pessoaManagedBean.documento.tipoDocumento}"
+                converter="tipoDocumentoConverter">
+                <f:selectItems 
+                    value="#{tiposManagedBean.listarTipoDocumento()}"
+                    var="tipoDocumento"
+                    itemLabel="#{tipoDocumento.descricao}"
+                    itemValue="#{tipoDocumento}"/>
+            </p:selectOneMenu>
+            
+             <h:inputHidden
+                 value="#{pessoaManagedBean.telefone.idTelefone}"/>
+            <br/>Telefone:
+            <p:inputText
+                value="#{pessoaManagedBean.telefone.numero}"/>
+            
+            Tipo Telefone: 
+            <p:selectOneMenu
+                value="#{pessoaManagedBean.telefone.tipoTelefone}"
+                converter="tipoTelefoneConverter">
+                <f:selectItems 
+                    value="#{tiposManagedBean.listarTipoTelefone()}"
+                    var="tipoTelefone"
+                    itemLabel="#{tipoTelefone.descricao}"
+                    itemValue="#{tipoTelefone}"/>
+            </p:selectOneMenu>
+            
+              <h:inputHidden
+                  value="#{pessoaManagedBean.endereco.idEndereco}"/>
+             
+             <br/>Logradouro:
+             
+             <p:inputText
+                 value="#{pessoaManagedBean.endereco.logradouro}"/>
+             
+             Tipo Logradouro:
+            
+             <p:selectOneMenu
+                 value="#{pessoaManagedBean.endereco.tipoLogradouro}"
+                converter="tipoLogradouroConverter">
+                <f:selectItems 
+                    value="#{tiposManagedBean.listarTipoLogradouro()}"
+                    var="tipoLogradouro"
+                    itemLabel="#{tipoLogradouro.descricao}"
+                    itemValue="#{tipoLogradouro}"/>
+            </p:selectOneMenu>
+             
+              Número:
+             
+             <p:inputText
+                 value="#{pessoaManagedBean.endereco.numero}"/>
+             
+              <br/>Bairro:
+             
+             <p:inputText
+                 value="#{pessoaManagedBean.endereco.bairro}"/>
+             
+              Cidade: 
+             
+             <p:inputText
+                 value="#{pessoaManagedBean.endereco.cidade}"/>
+             
+             Estado: 
+             <p:selectOneMenu
+                 value="#{pessoaManagedBean.endereco.uf}"
+                converter="uFConverter">
+                <f:selectItems 
+                    value="#{tiposManagedBean.listarUF()}"
+                    var="uf"
+                    itemLabel="#{uf.estado}"
+                    itemValue="#{uf}"/>
+            </p:selectOneMenu>
+             
             <p:commandButton 
                 value="Salvar" 
                 icon="ui-icon-disk" 

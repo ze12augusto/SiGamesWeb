@@ -8,6 +8,7 @@ package br.com.sigames.ejb.entidades;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -88,27 +89,24 @@ public class Uf implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 0;
-        hash += (uf != null ? uf.hashCode() : 0);
+        int hash = 7;
+        hash = 43 * hash + Objects.hashCode(this.uf);
         return hash;
     }
 
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Uf)) {
+    public boolean equals(Object obj) {
+        if (obj == null) {
             return false;
         }
-        Uf other = (Uf) object;
-        if ((this.uf == null && other.uf != null) || (this.uf != null && !this.uf.equals(other.uf))) {
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Uf other = (Uf) obj;
+        if (!Objects.equals(this.uf, other.uf)) {
             return false;
         }
         return true;
     }
 
-    @Override
-    public String toString() {
-        return "br.com.sigames.ejb.entidades.Uf[ uf=" + uf + " ]";
-    }
-    
 }

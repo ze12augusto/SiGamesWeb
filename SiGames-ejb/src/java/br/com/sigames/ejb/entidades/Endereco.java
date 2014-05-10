@@ -44,7 +44,7 @@ public class Endereco implements Serializable {
     @NotNull(message = "Informe o bairro")
     @Column(name = "Bairro", nullable = false, length = 40)
     private String bairro;
-    @JoinColumn(name = "IdLogradouro", referencedColumnName = "IdLogradouro", nullable = false)
+    @JoinColumn(name = "IdTipoLogradouro", referencedColumnName = "IdTipoLogradouro", nullable = false)
     @ManyToOne(optional = false)
     private TipoLogradouro tipoLogradouro;
     @JoinColumn(name = "UF", referencedColumnName = "UF", nullable = false)

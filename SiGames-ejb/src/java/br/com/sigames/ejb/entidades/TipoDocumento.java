@@ -8,6 +8,7 @@ package br.com.sigames.ejb.entidades;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -76,27 +77,24 @@ public class TipoDocumento implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 0;
-        hash += (idTipoDocumento != null ? idTipoDocumento.hashCode() : 0);
+        int hash = 5;
+        hash = 37 * hash + Objects.hashCode(this.idTipoDocumento);
         return hash;
     }
 
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof TipoDocumento)) {
+    public boolean equals(Object obj) {
+        if (obj == null) {
             return false;
         }
-        TipoDocumento other = (TipoDocumento) object;
-        if ((this.idTipoDocumento == null && other.idTipoDocumento != null) || (this.idTipoDocumento != null && !this.idTipoDocumento.equals(other.idTipoDocumento))) {
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final TipoDocumento other = (TipoDocumento) obj;
+        if (!Objects.equals(this.idTipoDocumento, other.idTipoDocumento)) {
             return false;
         }
         return true;
     }
-
-    @Override
-    public String toString() {
-        return "br.com.sigames.ejb.entidades.TipoDocumento[ idTipoDocumento=" + idTipoDocumento + " ]";
-    }
-    
+ 
 }

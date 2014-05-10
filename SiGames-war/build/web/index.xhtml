@@ -2,12 +2,12 @@
 
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
    
     <ui:composition template="template.xhtml">
         
         <ui:define name="conteudo">
-            Bem vindo
             
             #{criadorUfPadrao.criadorUF()}
             #{criadorTipoTelefonePadrao.criarTipoTelefone()}
@@ -15,6 +15,10 @@
             #{criadorTipoLogradouroPadrao.criadorTipoLogradouro()}
             #{criadorClientePadrao.criadorClientePadrao()}
             #{criadorFornecedorPadrao.criadorFornecedorPadrao()}
+            
+             <p:graphicImage url="imagens/lara.jpg"/>
+
+            
         </ui:define>
         
     </ui:composition>

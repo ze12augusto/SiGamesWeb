@@ -1,10 +1,11 @@
 package br.com.sigames.controller;
 
+import br.com.sigames.ejb.Ejb.FornecedorEJB;
 import br.com.sigames.ejb.Ejb.ProdutoEJB;
-import br.com.sigames.ejb.Ejb.ProdutoFornecedorEJB;
+import br.com.sigames.ejb.entidades.Fornecedor;
+import br.com.sigames.ejb.entidades.Pessoa;
 import br.com.sigames.ejb.entidades.Produto;
-import br.com.sigames.ejb.entidades.ProdutoFornecedor;
-import br.com.sigames.ejb.entidades.ProdutoFornecedorPK;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
@@ -22,19 +23,22 @@ public class ProdutoManagedBean {
 
     private Produto produto;
     private Produto produtoSelecionado;
-    private ProdutoFornecedor pf;
-    private ProdutoFornecedorPK pk;
+    private Fornecedor fornecedor;
+    private List<Produto> produtos;
+    private List<Fornecedor> fornecedores;
+    private List<Pessoa> pessoas;
 
     @EJB
     private ProdutoEJB produtoService;
 
     @EJB
-    private ProdutoFornecedorEJB pfEjb;
+    private FornecedorEJB fornecedorEjb;
 
     public ProdutoManagedBean() {
+        pessoas = new ArrayList<>();
         produto = new Produto();
-        pf = new ProdutoFornecedor();
-        pk = new ProdutoFornecedorPK();
+        produtos = new ArrayList<>();
+        fornecedores = new ArrayList<>();
     }
 
     public List<Produto> listar() {
@@ -43,26 +47,20 @@ public class ProdutoManagedBean {
     }
 
     public void salvar() {
-        String erro = produtoService.salvar(produto);
+
+        recuperaFornecedores();
+        produto.setFornecedorList(fornecedores);
+        fornecedor = fornecedorEjb.recuperaPorId(fornecedor.getIdPessoa());
+        produtos = fornecedor.getProdutoList();
+        produtos.add(produto);
+        String erro = fornecedorEjb.salvar(fornecedor);
+
         if (erro == null) {
 
-            pk.setFornecedorIdPessoa(pf.getFornecedor().getIdPessoa());
-            pk.setIdProduto(produto.getIdProduto());
-            pf.setProdutoFornecedorPK(pk);
-            String erroPF = pfEjb.salvar(pf);
-
-            if (erroPF == null) {
-                FacesMessage fm
-                        = new FacesMessage(FacesMessage.SEVERITY_INFO,
-                                "Produto salvo com sucesso", null);
-                FacesContext.getCurrentInstance().addMessage(null, fm);
-
-            } else {
-                FacesMessage fm
-                        = new FacesMessage(FacesMessage.SEVERITY_ERROR,
-                                erroPF, null);
-                FacesContext.getCurrentInstance().addMessage(null, fm);
-            }
+            FacesMessage fm
+                    = new FacesMessage(FacesMessage.SEVERITY_INFO,
+                            "Produto salvo com sucesso", null);
+            FacesContext.getCurrentInstance().addMessage(null, fm);
 
         } else {
             FacesMessage fm
@@ -71,14 +69,24 @@ public class ProdutoManagedBean {
             FacesContext.getCurrentInstance().addMessage(null, fm);
         }
         produto = new Produto();
-        pf = new ProdutoFornecedor();
-        pk = new ProdutoFornecedorPK();
+        pessoas = new ArrayList<>();
+        produtos = new ArrayList<>();
+        fornecedores = new ArrayList<>();
     }
 
     public void excluir() {
 
-        pfEjb.recuperaIdProdutoFornecedorPorIdProduto(produtoSelecionado.getIdProduto());
-        produtoService.recuperaIdProdutoPorIdFornecedor(produtoSelecionado.getIdProduto());
+        produtoService.recuperaIdProduto(produtoSelecionado.getIdProduto());
+    }
+
+    private void recuperaFornecedores() {
+
+        for (Pessoa pessoaInList : pessoas) {
+
+            fornecedor = fornecedorEjb.recuperaPorId(pessoaInList.getIdPessoa());
+            fornecedores.add(fornecedor);
+        }
+
     }
 
     public Produto getProduto() {
@@ -101,12 +109,12 @@ public class ProdutoManagedBean {
         this.produtoSelecionado = produtoSelecionada;
     }
 
-    public ProdutoFornecedor getPf() {
-        return pf;
+    public List<Pessoa> getPessoas() {
+        return pessoas;
     }
 
-    public void setPf(ProdutoFornecedor pf) {
-        this.pf = pf;
+    public void setPessoas(List<Pessoa> pessoas) {
+        this.pessoas = pessoas;
     }
 
 }

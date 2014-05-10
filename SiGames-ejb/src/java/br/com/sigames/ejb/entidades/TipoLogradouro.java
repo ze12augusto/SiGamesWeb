@@ -8,6 +8,7 @@ package br.com.sigames.ejb.entidades;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -30,8 +31,8 @@ public class TipoLogradouro implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "IdLogradouro", nullable = false)
-    private Short idLogradouro;
+    @Column(name = "IdTipoLogradouro", nullable = false)
+    private Short idTipoLogradouro;
     @Basic(optional = false)
     @NotNull
     @Column(name = "Descricao", nullable = false, length = 40)
@@ -42,21 +43,21 @@ public class TipoLogradouro implements Serializable {
     public TipoLogradouro() {
     }
 
-    public TipoLogradouro(Short idLogradouro) {
-        this.idLogradouro = idLogradouro;
+    public TipoLogradouro(Short idTipoLogradouro) {
+        this.idTipoLogradouro = idTipoLogradouro;
     }
 
-    public TipoLogradouro(Short idLogradouro, String descricao) {
-        this.idLogradouro = idLogradouro;
+    public TipoLogradouro(Short idTipoLogradouro, String descricao) {
+        this.idTipoLogradouro = idTipoLogradouro;
         this.descricao = descricao;
     }
 
-    public Short getIdLogradouro() {
-        return idLogradouro;
+    public Short getIdTipoLogradouro() {
+        return idTipoLogradouro;
     }
 
-    public void setIdLogradouro(Short idLogradouro) {
-        this.idLogradouro = idLogradouro;
+    public void setIdTipoLogradouro(Short idTipoLogradouro) {
+        this.idTipoLogradouro = idTipoLogradouro;
     }
 
     public String getDescricao() {
@@ -78,27 +79,26 @@ public class TipoLogradouro implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 0;
-        hash += (idLogradouro != null ? idLogradouro.hashCode() : 0);
+        int hash = 5;
+        hash = 47 * hash + Objects.hashCode(this.idTipoLogradouro);
         return hash;
     }
 
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof TipoLogradouro)) {
+    public boolean equals(Object obj) {
+        if (obj == null) {
             return false;
         }
-        TipoLogradouro other = (TipoLogradouro) object;
-        if ((this.idLogradouro == null && other.idLogradouro != null) || (this.idLogradouro != null && !this.idLogradouro.equals(other.idLogradouro))) {
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final TipoLogradouro other = (TipoLogradouro) obj;
+        if (!Objects.equals(this.idTipoLogradouro, other.idTipoLogradouro)) {
             return false;
         }
         return true;
     }
 
-    @Override
-    public String toString() {
-        return "br.com.sigames.ejb.entidades.TipoLogradouro[ idLogradouro=" + idLogradouro + " ]";
-    }
+   
     
 }

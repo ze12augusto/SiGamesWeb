@@ -21,7 +21,7 @@ public class TipoLogradouroEJB {
 
         TipoLogradouro tl = new TipoLogradouro();
         tl.setDescricao(descricao);
-        tl.setIdLogradouro(Short.MIN_VALUE);
+        tl.setIdTipoLogradouro(Short.MIN_VALUE);
 
         try {
 

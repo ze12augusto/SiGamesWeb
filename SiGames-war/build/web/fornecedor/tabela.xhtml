@@ -43,6 +43,24 @@ and open the template in the editor.
                 #{fornecedor.dataCadastro}
             </p:column>
             
+            <p:column headerText="Documentos">
+                <ui:repeat value="#{fornecedor.documentos}" var="documentos">
+                    #{documentos.documento} -- #{documentos.tipoDocumento.descricao}
+                </ui:repeat>
+            </p:column>
+            
+            <p:column headerText="Telefones">
+                <ui:repeat value="#{fornecedor.telefones}" var="telefones">
+                    #{telefones.numero} -- #{telefones.tipoTelefone.descricao}
+                </ui:repeat>
+            </p:column>
+            
+            <p:column headerText="Endereços">
+                <ui:repeat value="#{fornecedor.enderecos}" var="enderecos">
+                   #{enderecos.logradouro}, #{enderecos.numero}, #{enderecos.bairro}, #{enderecos.cidade}, #{enderecos.uf.uf}
+                </ui:repeat>
+            </p:column>
+            
         </p:dataTable>
     </p:panel>
         

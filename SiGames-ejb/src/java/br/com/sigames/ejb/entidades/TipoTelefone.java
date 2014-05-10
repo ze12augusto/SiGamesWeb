@@ -8,6 +8,7 @@ package br.com.sigames.ejb.entidades;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -80,27 +81,23 @@ public class TipoTelefone implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 0;
-        hash += (idTipoTelefone != null ? idTipoTelefone.hashCode() : 0);
+        int hash = 5;
+        hash = 97 * hash + Objects.hashCode(this.idTipoTelefone);
         return hash;
     }
 
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof TipoTelefone)) {
+    public boolean equals(Object obj) {
+        if (obj == null) {
             return false;
         }
-        TipoTelefone other = (TipoTelefone) object;
-        if ((this.idTipoTelefone == null && other.idTipoTelefone != null) || (this.idTipoTelefone != null && !this.idTipoTelefone.equals(other.idTipoTelefone))) {
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final TipoTelefone other = (TipoTelefone) obj;
+        if (!Objects.equals(this.idTipoTelefone, other.idTipoTelefone)) {
             return false;
         }
         return true;
     }
-
-    @Override
-    public String toString() {
-        return "br.com.sigames.ejb.entidades.TipoTelefone[ idTipoTelefone=" + idTipoTelefone + " ]";
-    }
-    
 }

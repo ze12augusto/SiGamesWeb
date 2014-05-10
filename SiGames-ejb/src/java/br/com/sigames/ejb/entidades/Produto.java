@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.com.sigames.ejb.entidades;
 
 import java.io.Serializable;
@@ -13,6 +8,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -38,14 +34,17 @@ public class Produto implements Serializable {
     @NotNull(message = "Informe um tipo")
     @Column(name = "TipoProduto", nullable = false, length = 30)
     private String tipoProduto;
-
+    @NotNull(message = "Informe o preco")
+    @Column(name = "PrecoUnitario", nullable = false)
+    private Double precoUnitario;
     @OneToMany(mappedBy = "produto",
             fetch = FetchType.LAZY)
     private List<ItemVenda> itemVendaList;
-    @OneToMany(mappedBy = "produto",
-            fetch = FetchType.LAZY)
-    private List<ProdutoFornecedor> produtoFornecedorList;
-
+    
+    @NotNull(message = "Selecione um Fornecedor")
+    @ManyToMany(mappedBy = "produtoList")
+    private List<Fornecedor> fornecedorList;
+    
     public Produto() {
     }
 
@@ -92,13 +91,20 @@ public class Produto implements Serializable {
         this.itemVendaList = itemVendaList;
     }
 
-    @XmlTransient
-    public List<ProdutoFornecedor> getProdutoFornecedorList() {
-        return produtoFornecedorList;
+    public Double getPrecoUnitario() {
+        return precoUnitario;
     }
 
-    public void setProdutoFornecedorList(List<ProdutoFornecedor> produtoFornecedorList) {
-        this.produtoFornecedorList = produtoFornecedorList;
+    public void setPrecoUnitario(Double precoUnitario) {
+        this.precoUnitario = precoUnitario;
+    }
+
+    public List<Fornecedor> getFornecedorList() {
+        return fornecedorList;
+    }
+
+    public void setFornecedorList(List<Fornecedor> fornecedorList) {
+        this.fornecedorList = fornecedorList;
     }
 
     @Override
@@ -120,10 +126,4 @@ public class Produto implements Serializable {
         }
         return true;
     }
-
-    @Override
-    public String toString() {
-        return "br.com.sigames.ejb.entidades.Produto[ idProduto=" + idProduto + " ]";
-    }
-
 }
