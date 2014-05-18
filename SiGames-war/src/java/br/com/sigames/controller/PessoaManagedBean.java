@@ -1,15 +1,16 @@
 package br.com.sigames.controller;
 
-import br.com.sigames.ejb.entidades.Pessoa;
 import br.com.sigames.ejb.Ejb.ClienteEJB;
-import br.com.sigames.ejb.Ejb.PessoaEJB;
-import br.com.sigames.ejb.Ejb.EnderecoEJB;
-import br.com.sigames.ejb.Ejb.TelefoneEJB;
 import br.com.sigames.ejb.Ejb.DocumentoEJB;
+import br.com.sigames.ejb.Ejb.EnderecoEJB;
 import br.com.sigames.ejb.Ejb.FornecedorEJB;
+import br.com.sigames.ejb.Ejb.PessoaEJB;
+import br.com.sigames.ejb.Ejb.TelefoneEJB;
 import br.com.sigames.ejb.entidades.Documento;
 import br.com.sigames.ejb.entidades.Endereco;
+import br.com.sigames.ejb.entidades.Pessoa;
 import br.com.sigames.ejb.entidades.Telefone;
+import br.com.sigames.ejb.model.GraficoModel;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -18,6 +19,7 @@ import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
+import org.primefaces.model.chart.PieChartModel;
 
 /**
  *
@@ -103,8 +105,29 @@ public class PessoaManagedBean {
         }
     }
 
+     public PieChartModel gerarGrafico(){
+        
+        PieChartModel model = new PieChartModel();
+        
+        List<GraficoModel> graficoModels =
+                pessoaService.gerarGrafico();
+        
+        for (GraficoModel graficoModel : graficoModels) {
+            
+            model.set(graficoModel.getNomeFornecedor(),
+                    graficoModel.getQtdProdutos());
+        }
+        
+        return model;
+    }
+    
     public void salvarCliente() {
 
+        for(int i =0; i < 1000000000; i++){
+        
+            
+        }
+        
         String erro = salvarPessoa();
 
         if (erro == null) {

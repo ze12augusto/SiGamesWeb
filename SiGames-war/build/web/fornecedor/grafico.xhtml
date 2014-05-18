@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+      >
+     <ui:composition template="../template.xhtml">
+        
+        <ui:define name="conteudo">
+            <p:pieChart
+                value="#{pessoaManagedBean.gerarGrafico()}"
+                title="Quantidade de produto por fornecedor"
+                showDataLabels="true"
+                legendPosition="e"
+                />
+        </ui:define>
+    </ui:composition>
+        
+</html>

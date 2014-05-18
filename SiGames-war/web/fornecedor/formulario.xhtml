@@ -15,96 +15,102 @@ and open the template in the editor.
             <p:growl/>
             <h:inputHidden
                 value="#{pessoaManagedBean.pessoa.idPessoa}"/>
-            Nome:
-            <p:inputText
-                value="#{pessoaManagedBean.pessoa.nome}"/>
-            
-             <h:inputHidden
-                 value="#{pessoaManagedBean.documento.idDocumento}"/>
-            
-             <br/>Documento:
-            <p:inputText
-                value="#{pessoaManagedBean.documento.documento}"/>
-            
-            Tipo Documento:
-            <p:selectOneMenu
-                value="#{pessoaManagedBean.documento.tipoDocumento}"
-                converter="tipoDocumentoConverter">
-                <f:selectItems 
-                    value="#{tiposManagedBean.listarTipoDocumento()}"
-                    var="tipoDocumento"
-                    itemLabel="#{tipoDocumento.descricao}"
-                    itemValue="#{tipoDocumento}"/>
-            </p:selectOneMenu>
-            
-             <h:inputHidden
-                 value="#{pessoaManagedBean.telefone.idTelefone}"/>
-            <br/>Telefone:
-            <p:inputText
-                value="#{pessoaManagedBean.telefone.numero}"/>
-            
-            Tipo Telefone: 
-            <p:selectOneMenu
-                value="#{pessoaManagedBean.telefone.tipoTelefone}"
-                converter="tipoTelefoneConverter">
-                <f:selectItems 
-                    value="#{tiposManagedBean.listarTipoTelefone()}"
-                    var="tipoTelefone"
-                    itemLabel="#{tipoTelefone.descricao}"
-                    itemValue="#{tipoTelefone}"/>
-            </p:selectOneMenu>
-            
-              <h:inputHidden
-                  value="#{pessoaManagedBean.endereco.idEndereco}"/>
-             
-             <br/>Logradouro:
-             
-             <p:inputText
-                 value="#{pessoaManagedBean.endereco.logradouro}"/>
-             
-             Tipo Logradouro:
-            
-             <p:selectOneMenu
-                 value="#{pessoaManagedBean.endereco.tipoLogradouro}"
-                converter="tipoLogradouroConverter">
-                <f:selectItems 
-                    value="#{tiposManagedBean.listarTipoLogradouro()}"
-                    var="tipoLogradouro"
-                    itemLabel="#{tipoLogradouro.descricao}"
-                    itemValue="#{tipoLogradouro}"/>
-            </p:selectOneMenu>
-             
-              Número:
-             
-             <p:inputText
-                 value="#{pessoaManagedBean.endereco.numero}"/>
-             
-              <br/>Bairro:
-             
-             <p:inputText
-                 value="#{pessoaManagedBean.endereco.bairro}"/>
-             
-              Cidade: 
-             
-             <p:inputText
-                 value="#{pessoaManagedBean.endereco.cidade}"/>
-             
-             Estado: 
-             <p:selectOneMenu
-                 value="#{pessoaManagedBean.endereco.uf}"
-                converter="uFConverter">
-                <f:selectItems 
-                    value="#{tiposManagedBean.listarUF()}"
-                    var="uf"
-                    itemLabel="#{uf.estado}"
-                    itemValue="#{uf}"/>
-            </p:selectOneMenu>
-             
-            <p:commandButton 
-                value="Salvar" 
-                icon="ui-icon-disk" 
-                actionListener="#{pessoaManagedBean.salvarFornecedor()}"
-                update="painelFornecedor, :formTabela:painelTabela"/>
+            <h:inputHidden
+                value="#{pessoaManagedBean.documento.idDocumento}"/>
+            <h:inputHidden
+                value="#{pessoaManagedBean.telefone.idTelefone}"/>
+
+            <h:inputHidden
+                value="#{pessoaManagedBean.endereco.idEndereco}"/>
+
+            <h:panelGrid columns="4">
+                Nome:
+                <p:inputText
+                    value="#{pessoaManagedBean.pessoa.nome}"/>
+
+
+
+                Documento:
+                <p:inputText
+                    value="#{pessoaManagedBean.documento.documento}"/>
+
+                Tipo Documento:
+                <p:selectOneMenu
+                    value="#{pessoaManagedBean.documento.tipoDocumento}"
+                    converter="tipoDocumentoConverter">
+                    <f:selectItems 
+                        value="#{tiposManagedBean.listarTipoDocumento()}"
+                        var="tipoDocumento"
+                        itemLabel="#{tipoDocumento.descricao}"
+                        itemValue="#{tipoDocumento}"/>
+                </p:selectOneMenu>
+
+
+                Telefone:
+                <p:inputText
+                    value="#{pessoaManagedBean.telefone.numero}"/>
+
+                Tipo Telefone: 
+                <p:selectOneMenu
+                    value="#{pessoaManagedBean.telefone.tipoTelefone}"
+                    converter="tipoTelefoneConverter">
+                    <f:selectItems 
+                        value="#{tiposManagedBean.listarTipoTelefone()}"
+                        var="tipoTelefone"
+                        itemLabel="#{tipoTelefone.descricao}"
+                        itemValue="#{tipoTelefone}"/>
+                </p:selectOneMenu>
+
+
+                Logradouro:
+
+                <p:inputText
+                    value="#{pessoaManagedBean.endereco.logradouro}"/>
+
+                Tipo Logradouro:
+
+                <p:selectOneMenu
+                    value="#{pessoaManagedBean.endereco.tipoLogradouro}"
+                    converter="tipoLogradouroConverter">
+                    <f:selectItems 
+                        value="#{tiposManagedBean.listarTipoLogradouro()}"
+                        var="tipoLogradouro"
+                        itemLabel="#{tipoLogradouro.descricao}"
+                        itemValue="#{tipoLogradouro}"/>
+                </p:selectOneMenu>
+
+                Número:
+
+                <p:inputText
+                    value="#{pessoaManagedBean.endereco.numero}"/>
+
+                Bairro:
+
+                <p:inputText
+                    value="#{pessoaManagedBean.endereco.bairro}"/>
+
+                Cidade: 
+
+                <p:inputText
+                    value="#{pessoaManagedBean.endereco.cidade}"/>
+
+                Estado: 
+                <p:selectOneMenu
+                    value="#{pessoaManagedBean.endereco.uf}"
+                    converter="uFConverter">
+                    <f:selectItems 
+                        value="#{tiposManagedBean.listarUF()}"
+                        var="uf"
+                        itemLabel="#{uf.estado}"
+                        itemValue="#{uf}"/>
+                </p:selectOneMenu>
+
+                <p:commandButton 
+                    value="Salvar" 
+                    icon="ui-icon-disk" 
+                    actionListener="#{pessoaManagedBean.salvarFornecedor()}"
+                    update="painelFornecedor, :formTabela:painelTabela"/>
+            </h:panelGrid>
         </p:panel>
     </h:form>
 

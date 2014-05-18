@@ -1,6 +1,7 @@
 package br.com.sigames.ejb.Ejb;
 
 import br.com.sigames.ejb.entidades.Pessoa;
+import br.com.sigames.ejb.model.GraficoModel;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -69,6 +70,17 @@ public class PessoaEJB {
                         Pessoa.class);
 
         return fornecedorQuery.getResultList();
+    }
+    
+    public List<GraficoModel> gerarGrafico(){
+        
+       TypedQuery<GraficoModel> query =
+               em.createQuery("select"
+                       + " new br.com.sigames.ejb.model.GraficoModel"
+                       + " (p.nome, SIZE(p.fornecedor.produtoList))"
+                       + " from Pessoa as p", GraficoModel.class);
+        
+        return query.getResultList();
     }
 
 }

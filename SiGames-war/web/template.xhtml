@@ -12,7 +12,17 @@
     </h:head>
 
     <h:body>
+        <p:ajaxStatus onstart="loadingDialog.show()"
+                      onsuccess="loadingDialog.hide()"/>
+        <p:dialog header="Carregando" 
+                  draggable="false"
+                  closable="false"
+                  modal="true"
+                  widgetVar="loadingDialog">
 
+            <h:graphicImage value="../imagens/ajax-loader.gif"/>
+            
+        </p:dialog>
         <p:layout fullPage="true">
 
             <p:layoutUnit position="south" size="40" >
@@ -24,7 +34,6 @@
                 <h:form>
 
                     <a href="/SiGames-war/index.html">Início</a>
-
                     <p:menubar>
                         <p:submenu label="Cadastro">
                             <p:menuitem value="Cliente" url="/cliente/index.html"/>
@@ -34,6 +43,14 @@
 
                     </p:menubar>
 
+                       <p:menubar>
+                        <p:submenu label="Relatório">
+                            <p:menuitem value="Produtos" url="/fornecedor/grafico.html"/>
+                        </p:submenu>
+
+                    </p:menubar>
+                    
+                    
                 </h:form>
 
             </p:layoutUnit>
